@@ -5,7 +5,7 @@ import { AppleScriptFramework } from "./framework.js";
 // import { clipboardCategory } from "./categories/clipboard.js";
 import { notificationsCategory } from "./categories/notifications.js";
 // import { itermCategory } from "./categories/iterm.js";
-import { deepResearchCategory } from "./categories/deep_research.js";
+import { deepResearchCategory } from "./categories/deepresearch.js";
 
 const server = new AppleScriptFramework({
   name: "applescript-server",

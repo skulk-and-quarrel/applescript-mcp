@@ -1,7 +1,7 @@
 import { ScriptCategory } from "../types/index.js";
 
 export const deepResearchCategory: ScriptCategory = {
-  name: "deep_research",
+  name: "deepResearch",
   description: "Deep research operations",
   scripts: [
     {
@@ -38,10 +38,10 @@ export const deepResearchCategory: ScriptCategory = {
                     click button 1 of scroll area 1 of group 1 of pop over 1 of button 1 of button 3 of toolbar 1 of window "ChatGPT"
                     delay 0.2
                     --- Activate Deep Research
-                    click button 4 of group 2 of splitter group 1 of group 1 of window 1
+                    click button 3 of group 2 of splitter group 1 of group 1 of window "ChatGPT"
                     delay 0.2
                     --- Type message		
-                    click scroll area 3 of group 2 of splitter group 1 of group 1 of window 1
+                    click scroll area 3 of group 2 of splitter group 1 of group 1 of window "ChatGPT"
                     delay 0.2
                     keystroke "${args.question}"
                     -- Send the message
@@ -50,7 +50,7 @@ export const deepResearchCategory: ScriptCategory = {
                     keystroke return
                 end tell
             end tell
-            delay 10
+            delay 12
             tell application "ChatGPT"
                 activate
             end tell
@@ -71,9 +71,14 @@ export const deepResearchCategory: ScriptCategory = {
                 --- click at {xPosition + 25, yPosition + ySize - 10}
             end tell
             set clickCommand to "/opt/homebrew/bin/cliclick c:" & xPosition + 25 & "," & yPosition + ySize - 10
+            delay 0.5
             do shell script clickCommand
             tell application "System Events"
               set clipboardContent to the clipboard
+            end tell
+            delay 0.5
+            tell application "Claude"
+                activate
             end tell
             return & "Need to answer the following questions: " & clipboardContent
       `,
