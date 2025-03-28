@@ -11,6 +11,7 @@ This server provides a standardized interface for AI applications to control sys
 - 🔔 System notifications
 - ⚙️ System controls (volume, dark mode, apps)
 - 📟 iTerm terminal integration
+- 🔬 Deep research capabilities
 
 ### Planned Features
 - 📬 Mail (list emails, save attachments, summarize, send)
@@ -66,6 +67,11 @@ This server provides a standardized interface for AI applications to control sys
 |---------|-------------|------------|
 | `paste_clipboard` | Paste to iTerm | None |
 | `run` | Execute command | `command`, `newWindow` (optional) |
+
+### Deep Research
+| Command | Description | Parameters |
+|---------|-------------|------------|
+| `start_deep_research` | Start deep research process with ChatGPT | `question` |
 
 ## Development
 
