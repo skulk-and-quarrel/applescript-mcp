@@ -48,17 +48,9 @@ export const deepResearchCategory: ScriptCategory = {
                     -- Example: Press the Enter key to send
                     delay 0.2
                     keystroke return
-                end tell
-            end tell
-            delay 12
-            tell application "ChatGPT"
-                activate
-            end tell
-            tell application "System Events"
-                tell process "ChatGPT"
+                    delay 12
                     try
                         tell group 2 of list 1 of list 1 of scroll area 1 of group 2 of splitter group 1 of group 1 of window "ChatGPT"
-                            
                             set {xPosition, yPosition} to position
                             set {xSize, ySize} to size
                             --- display dialog xSize
@@ -67,8 +59,6 @@ export const deepResearchCategory: ScriptCategory = {
                         -- modify offsets if hot spot is not centered:
                     end try
                 end tell
-                --- delay 0.5
-                --- click at {xPosition + 25, yPosition + ySize - 10}
             end tell
             set clickCommand to "/opt/homebrew/bin/cliclick c:" & xPosition + 25 & "," & yPosition + ySize - 10
             delay 0.5
@@ -80,7 +70,42 @@ export const deepResearchCategory: ScriptCategory = {
             tell application "Claude"
                 activate
             end tell
-            return & "Need to answer the following questions: " & clipboardContent
+            return "Need to answer the following questions: " & clipboardContent
+      `,
+    },
+    {
+      name: "respond_deep_research",
+      description: "Responds to the initial deep research question and kicks off the research process. Should be called after the initial question is posed (after the first response from deepResearch_start_deep_research) and the answer is provided.",
+      schema: {
+        type: "object",
+        properties: {
+          clarifying_question: {
+            type: "string",
+            description: "Answers to the clarifying questions asked after the initial question was posed",
+          },
+        },
+        required: ["clarifying_question"],
+      },
+      script: (args) => `
+        tell application "ChatGPT"
+                activate
+            end tell
+            delay 0.5
+            tell application "System Events"
+                -- Reference the ChatGPT process
+                tell process "ChatGPT"
+                    click scroll area 3 of group 2 of splitter group 1 of group 1 of window "ChatGPT"
+                    delay 0.5
+                    keystroke "${args.clarifying_question}"
+                    delay 2
+                    keystroke return
+                end tell
+            end tell
+            delay 1
+            tell application "Claude"
+                activate
+            end tell
+            return "Started deep research, inform the user that the research is underway and they should check back in 10-15 minutes"
       `,
     },
   ],
